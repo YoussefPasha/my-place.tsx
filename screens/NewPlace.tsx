@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, Text, View, TextInput } from "react-native";
 import { useDispatch } from "react-redux";
 import { MainButton } from "../components";
 import * as placesActions from "../store/places-actions";
+import { ImagePicker } from "../components";
 
 const styles = StyleSheet.create({
   form: {
@@ -41,7 +42,8 @@ const NewPlace = (props: any) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-        <MainButton title="Sve Place" onPress={SavePlaceHandler} />
+        <ImagePicker />
+        <MainButton title="Save Place" onPress={SavePlaceHandler} />
       </View>
     </ScrollView>
   );
