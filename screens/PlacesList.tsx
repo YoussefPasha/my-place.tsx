@@ -29,7 +29,7 @@ const PlacesList = (props: any) => {
       data={places}
       renderItem={(itemData: any) => (
         <PlaceItem
-          image={null}
+          image={itemData.item.image}
           title={itemData.item.title}
           address={null}
           onSelect={() => {

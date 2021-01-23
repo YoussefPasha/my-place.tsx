@@ -25,14 +25,16 @@ const styles = StyleSheet.create({
 const NewPlace = (props: any) => {
   const { setOptions, navigate } = props.navigation;
   const [titleValue, setTitleValue] = useState("");
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const titleChangeHandler = (text: string) => {
     setTitleValue(text);
   };
   const SavePlaceHandler = () => {
-    dispatch(placesActions.addPlace(titleValue));
+    dispatch(placesActions.addPlace(titleValue, image));
     navigate("Places");
   };
+
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -42,7 +44,7 @@ const NewPlace = (props: any) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-        <ImagePicker />
+        <ImagePicker onImageTaken={(imagePath: any) => setImage(imagePath)} />
         <View style={{ alignItems: "center" }}>
           <MainButton
             title="Save Place"

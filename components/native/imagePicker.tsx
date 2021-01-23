@@ -7,6 +7,7 @@ import { MainButton } from "../UI";
 const styles = StyleSheet.create({
   imagePicker: {
     alignItems: "center",
+    marginBottom: 15,
   },
   imagePreview: {
     width: "100%",
@@ -23,11 +24,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const imagePicker = () => {
+const imagePicker = (props: any) => {
   const [pickedImage, setPickedImage] = useState("");
 
   const verifyPermissions = async () => {
-    const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const result = await Permissions.askAsync(Permissions.CAMERA);
     if (result.status !== "granted") {
       Alert.alert(
         "Insufficient permissions!",
@@ -50,6 +51,7 @@ const imagePicker = () => {
       quality: 0.5,
     });
     setPickedImage(image.uri);
+    props.onImageTaken(image.uri);
   };
 
   return (
