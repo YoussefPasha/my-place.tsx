@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { HeaderButton } from "../components";
+import { useSelector } from "react-redux";
+import { HeaderButton, PlaceItem } from "../components";
 
-const styles = StyleSheet.create({});
 const PlacesList = (props: any) => {
   const { setOptions, navigate } = props.navigation;
+  const places = useSelector((state: any) => state.places.places);
 
   useEffect(() => {
     setOptions({
@@ -23,9 +25,22 @@ const PlacesList = (props: any) => {
     });
   }, [setOptions, navigate]);
   return (
-    <View>
-      <Text>Places List</Text>
-    </View>
+    <FlatList
+      data={places}
+      renderItem={(itemData: any) => (
+        <PlaceItem
+          image={null}
+          title={itemData.item.title}
+          address={null}
+          onSelect={() => {
+            navigate("PlacesDetail", {
+              placeTitle: itemData.item.title,
+              placeId: itemData.item.id,
+            });
+          }}
+        />
+      )}
+    />
   );
 };
 
