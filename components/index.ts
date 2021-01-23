@@ -1,1 +1,1 @@
-export { MainButton } from "./UI";
+export { MainButton, HeaderButton } from "./UI";
