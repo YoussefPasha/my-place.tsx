@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text, View, TextInput } from "react-native";
+import { useDispatch } from "react-redux";
 import { MainButton } from "../components";
+import * as placesActions from "../store/places-actions";
 
 const styles = StyleSheet.create({
   form: {
@@ -19,13 +21,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewPlace = () => {
+const NewPlace = (props: any) => {
+  const { setOptions, navigate } = props.navigation;
   const [titleValue, setTitleValue] = useState("");
+  const dispatch = useDispatch();
   const titleChangeHandler = (text: string) => {
     setTitleValue(text);
   };
   const SavePlaceHandler = () => {
-    
+    dispatch(placesActions.addPlace(titleValue));
+    navigate("Places");
   };
   return (
     <ScrollView>
