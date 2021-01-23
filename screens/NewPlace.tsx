@@ -43,7 +43,13 @@ const NewPlace = (props: any) => {
           value={titleValue}
         />
         <ImagePicker />
-        <MainButton title="Save Place" onPress={SavePlaceHandler} />
+        <View style={{ alignItems: "center" }}>
+          <MainButton
+            title="Save Place"
+            color={"#303F9F"}
+            onPress={SavePlaceHandler}
+          />
+        </View>
       </View>
     </ScrollView>
   );

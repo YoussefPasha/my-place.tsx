@@ -6,7 +6,7 @@ const MainButton = (props: any) => {
   return (
     <Button
       title={props.title}
-      type="clear"
+      type={props.color ? "outline" : "clear"}
       titleStyle={{
         color: props.color ? props.color : Colors.primary,
         fontSize: 16,
