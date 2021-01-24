@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
 
 const LocationPicker = (props: any) => {
   const [pickedLocation, setPickedLocation]: any = useState({
-    lat: null,
-    lng: null,
+    lat: 0,
+    lng: 0,
   });
   const [isFetching, setIsFetching] = useState(false);
 
@@ -83,8 +83,8 @@ const LocationPicker = (props: any) => {
             style={styles.mapPreview}
             provider={null}
             initialRegion={{
-              latitude: pickedLocation.lat ? pickedLocation.lat : 42.882004,
-              longitude: pickedLocation.lng ? pickedLocation.lng : 74.582748,
+              latitude: pickedLocation.lat,
+              longitude: pickedLocation.lng,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}

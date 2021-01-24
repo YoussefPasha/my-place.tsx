@@ -7,3 +7,4 @@
 - [x] [React-Navigation](https://reactnavigation.org/)
 - [x] [Redux](https://redux.js.org/)
 - [x] [expo-native-components](https://docs.expo.io/)
+- [x] [react-native-maps💕](https://github.com/react-native-maps/react-native-maps)
