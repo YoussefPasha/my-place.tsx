@@ -1,8 +1,37 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Platform, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { HeaderButton } from "../components";
 
-const Map = () => {
+const Map = (props: any) => {
+  const { setOptions, navigate } = props.navigation;
+
+  const savePickedLocation = () => {
+    if (!selectedLocation) {
+      return;
+    }
+    navigate("NewPlace", {
+      saveLocation: selectedLocation,
+    });
+  };
+
+  useEffect(() => {
+    setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="save"
+            iconName={
+              Platform.OS === "android" ? "md-checkmark" : "ios-checkmark"
+            }
+            onPress={savePickedLocation}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [setOptions]);
+
   const [selectedLocation, setSelectedLocation]: any = useState({
     lat: 0,
     lng: 0,
