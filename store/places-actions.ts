@@ -27,7 +27,6 @@ export const addPlace = (title: string, image: string) => {
         placeData: { id: dbResult.insertId, title, image: newPath },
       });
     } catch (error) {
-      console.log(error);
       throw error;
     }
   };

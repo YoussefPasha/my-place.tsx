@@ -19,7 +19,9 @@ const PlacesList = (props: any) => {
             title="Add Places"
             iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
             onPress={() => {
-              navigate("NewPlace");
+              navigate("NewPlace", {
+                param1: "",
+              });
             }}
           />
         </HeaderButtons>

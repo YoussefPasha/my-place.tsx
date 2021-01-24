@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator, Alert, StyleSheet, Text } from "react-native";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
@@ -30,6 +30,13 @@ const LocationPicker = (props: any) => {
   });
   const [isFetching, setIsFetching] = useState(false);
 
+  const saveLocation = props.saveLocation;
+  useEffect(() => {
+    if (saveLocation) {
+      setPickedLocation(saveLocation);
+    }
+  }, [saveLocation]);
+
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
     if (result.status !== "granted") {
@@ -53,7 +60,6 @@ const LocationPicker = (props: any) => {
       const userLocation: any = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.High,
       });
-      console.log(userLocation);
       setPickedLocation({
         lat: userLocation.coords.latitude,
         lng: userLocation.coords.longitude,
@@ -83,14 +89,13 @@ const LocationPicker = (props: any) => {
           {pickedLocation.lat !== 0 ? (
             <MapView
               style={styles.mapPreview}
-              provider={null}
               initialRegion={{
                 latitude: pickedLocation.lat,
                 longitude: pickedLocation.lng,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-            ></MapView>
+            />
           ) : (
             <Text>Please press Get user Location button </Text>
           )}

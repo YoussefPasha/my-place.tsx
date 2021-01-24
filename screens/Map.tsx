@@ -6,11 +6,16 @@ import { HeaderButton } from "../components";
 
 const Map = (props: any) => {
   const { setOptions, navigate } = props.navigation;
+  const [selectedLocation, setSelectedLocation]: any = useState({
+    lat: 0,
+    lng: 0,
+  });
 
   const savePickedLocation = () => {
     if (!selectedLocation) {
       return;
     }
+
     navigate("NewPlace", {
       saveLocation: selectedLocation,
     });
@@ -30,12 +35,7 @@ const Map = (props: any) => {
         </HeaderButtons>
       ),
     });
-  }, [setOptions]);
-
-  const [selectedLocation, setSelectedLocation]: any = useState({
-    lat: 0,
-    lng: 0,
-  });
+  }, [setOptions, savePickedLocation]);
 
   const mapRegion = {
     latitude: 37.78,
@@ -74,5 +74,3 @@ const Map = (props: any) => {
 };
 
 export default Map;
-
-const styles = StyleSheet.create({});

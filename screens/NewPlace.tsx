@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, Text, View, TextInput } from "react-native";
 import { useDispatch } from "react-redux";
 import { LocationPicker, MainButton, ImagePicker } from "../components";
@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
 });
 
 const NewPlace = (props: any) => {
+  const { saveLocation } = props.route.params;
+
   const { navigate } = props.navigation;
   const [titleValue, setTitleValue] = useState("");
   const [image, setImage] = useState("");
@@ -44,7 +46,7 @@ const NewPlace = (props: any) => {
           value={titleValue}
         />
         <ImagePicker onImageTaken={(imagePath: any) => setImage(imagePath)} />
-        <LocationPicker navigate={navigate} />
+        <LocationPicker navigate={navigate} saveLocation={saveLocation} />
         <View style={{ alignItems: "center" }}>
           <MainButton
             title="Save Place"
