@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text, View, TextInput } from "react-native";
 import { useDispatch } from "react-redux";
-import { MainButton } from "../components";
+import { LocationPicker, MainButton, ImagePicker } from "../components";
 import * as placesActions from "../store/places-actions";
-import { ImagePicker } from "../components";
 
 const styles = StyleSheet.create({
   form: {
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const NewPlace = (props: any) => {
-  const { setOptions, navigate } = props.navigation;
+  const { navigate } = props.navigation;
   const [titleValue, setTitleValue] = useState("");
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
@@ -45,6 +44,7 @@ const NewPlace = (props: any) => {
           value={titleValue}
         />
         <ImagePicker onImageTaken={(imagePath: any) => setImage(imagePath)} />
+        <LocationPicker />
         <View style={{ alignItems: "center" }}>
           <MainButton
             title="Save Place"
