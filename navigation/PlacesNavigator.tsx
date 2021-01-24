@@ -31,7 +31,14 @@ const PlacesNavigator = () => {
         }}
       />
       <PlacesStack.Screen name="PlacesDetail" component={PlacesDetail} />
-      <PlacesStack.Screen name="NewPlace" component={NewPlace} />
+      <PlacesStack.Screen
+        name="NewPlace"
+        component={NewPlace}
+        options={{
+          headerTitle: "Add new place",
+          headerTitleStyle: { fontSize: 25, fontWeight: "normal" },
+        }}
+      />
       <PlacesStack.Screen name="Map" component={Map} />
     </PlacesStack.Navigator>
   );

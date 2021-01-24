@@ -44,7 +44,7 @@ const NewPlace = (props: any) => {
           value={titleValue}
         />
         <ImagePicker onImageTaken={(imagePath: any) => setImage(imagePath)} />
-        <LocationPicker />
+        <LocationPicker navigate={navigate} />
         <View style={{ alignItems: "center" }}>
           <MainButton
             title="Save Place"

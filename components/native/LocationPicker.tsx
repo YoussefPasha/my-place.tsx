@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import { View, ActivityIndicator, Alert, StyleSheet } from "react-native";
+import { View, ActivityIndicator, Alert, StyleSheet, Text } from "react-native";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import Colors from "../../constants/Colors";
 import { MainButton } from "../UI";
 import MapView from "react-native-maps";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   locationPicker: {
     marginBottom: 15,
   },
   mapPreview: {
+    flex: 1,
     marginBottom: 10,
     width: "100%",
     height: 150,
     borderColor: "#ccc",
     borderWidth: 1,
     justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "flex-end",
     alignItems: "center",
   },
 });
@@ -73,29 +70,50 @@ const LocationPicker = (props: any) => {
     setIsFetching(false);
   };
 
+  const pickOnMapHandler = () => {
+    props.navigate("Map");
+  };
+
   return (
     <View style={styles.locationPicker}>
       {isFetching ? (
         <ActivityIndicator size="large" color={Colors.primary} />
       ) : (
-        <View style={styles.container}>
-          <MapView
-            style={styles.mapPreview}
-            provider={null}
-            initialRegion={{
-              latitude: pickedLocation.lat,
-              longitude: pickedLocation.lng,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          ></MapView>
-        </View>
+        <TouchableOpacity style={{ flex: 1 }} onPress={pickOnMapHandler}>
+          {pickedLocation.lat !== 0 ? (
+            <MapView
+              style={styles.mapPreview}
+              provider={null}
+              initialRegion={{
+                latitude: pickedLocation.lat,
+                longitude: pickedLocation.lng,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            ></MapView>
+          ) : (
+            <Text>Please press Get user Location button </Text>
+          )}
+        </TouchableOpacity>
       )}
-      <MainButton
-        title="Get User Location"
-        color={Colors.primary}
-        onPress={getLocationHandler}
-      />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: "100%",
+        }}
+      >
+        <MainButton
+          title="Get User Location"
+          color={Colors.primary}
+          onPress={getLocationHandler}
+        />
+        <MainButton
+          title="Pick on map"
+          color={Colors.primary}
+          onPress={pickOnMapHandler}
+        />
+      </View>
     </View>
   );
 };
