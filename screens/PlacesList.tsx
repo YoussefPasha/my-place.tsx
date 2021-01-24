@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { Platform } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HeaderButton, PlaceItem } from "../components";
+import * as placesActions from "../store/places-actions";
 
 const PlacesList = (props: any) => {
   const { setOptions, navigate } = props.navigation;
   const places = useSelector((state: any) => state.places.places);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setOptions({
@@ -23,7 +25,8 @@ const PlacesList = (props: any) => {
         </HeaderButtons>
       ),
     });
-  }, [setOptions, navigate]);
+    dispatch(placesActions.loadPlaces());
+  }, [setOptions, navigate, dispatch]);
   return (
     <FlatList
       data={places}
