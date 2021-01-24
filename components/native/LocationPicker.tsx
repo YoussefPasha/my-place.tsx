@@ -29,13 +29,15 @@ const LocationPicker = (props: any) => {
     lng: 0,
   });
   const [isFetching, setIsFetching] = useState(false);
+  const { onLocationPicker } = props;
 
   const saveLocation = props.saveLocation;
   useEffect(() => {
     if (saveLocation) {
       setPickedLocation(saveLocation);
+      onLocationPicker(saveLocation);
     }
-  }, [saveLocation]);
+  }, [saveLocation, onLocationPicker]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -61,6 +63,10 @@ const LocationPicker = (props: any) => {
         accuracy: Location.Accuracy.High,
       });
       setPickedLocation({
+        lat: userLocation.coords.latitude,
+        lng: userLocation.coords.longitude,
+      });
+      onLocationPicker({
         lat: userLocation.coords.latitude,
         lng: userLocation.coords.longitude,
       });
